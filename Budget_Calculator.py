@@ -8,7 +8,10 @@ class Budget_Calculator:
 
         self.incomes = self.read_notes(incomes_notes, "income")
         self.outcomes = self.read_notes(outcomes_notes, "outcome")
+        self.sumOfIncome = 0
+        self.sumOfOutcome = 0
         self.balance = self.calculate_balance()
+        
 
     def read_notes(self, file_path, note_type):
         f = open(file_path, "r")
@@ -24,17 +27,17 @@ class Budget_Calculator:
 
     def calculate_balance(self):
         
-        sumOfIncome = 0
+        
 
         for income in self.incomes:
-            sumOfIncome += income
+            self.sumOfIncome += income
 
-        sumOfOutcome = 0
+        
 
         for outcome in self.outcomes:
-            sumOfOutcome += outcome
+            self.sumOfOutcome += outcome
         
-        balance = sumOfIncome - sumOfOutcome
+        balance = self.sumOfIncome - self.sumOfOutcome
 
         return balance
     
@@ -46,11 +49,11 @@ class Budget_Calculator:
         print("Today's date is: "+ today.strftime("%B %d, %Y"))
         f.write("Summary of:"+ today.strftime("%B %d, %Y")+"\n")
 
-        f.write("Incomes: \n")
+        f.write("Incomes: "+str(self.sumOfIncome)+"\n")
         for income in self.incomes:
             f.write(str(income)+"\n")
         
-        f.write("Outcomes: \n")
+        f.write("Outcomes: "+str(self.sumOfOutcome)+"\n")
         for outcome in self.outcomes:
             f.write(str(outcome)+"\n")
         
@@ -64,7 +67,7 @@ class Budget_Calculator:
 def main():
     income_path = "./income_list.txt"
     outcome_path = "./outcome_list.txt"
-    budget_path = "./summary.txt"
+    budget_path = "./budget_list/summary-"+str(date.today().year)+"-"+str(date.today().month)+"-"+str(date.today().day)+".txt"
     budget_notes = Budget_Calculator(income_path, outcome_path)
     budget_notes.update_notes(budget_path)
 
