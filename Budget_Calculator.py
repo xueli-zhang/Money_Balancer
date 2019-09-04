@@ -42,7 +42,7 @@ class Budget_Calculator:
         return balance
     
     def update_notes(self, budget_notes):
-        f = open(budget_notes, "a+")
+        f = open(budget_notes, "w")
 
         #write date of budget notes
         today = date.today()
