@@ -27,7 +27,6 @@ class Budget_Calculator:
 
     def calculate_balance(self):
         
-        
 
         for income in self.incomes:
             self.sumOfIncome += income
@@ -36,8 +35,22 @@ class Budget_Calculator:
 
         for outcome in self.outcomes:
             self.sumOfOutcome += outcome
+
         
         balance = self.sumOfIncome - self.sumOfOutcome
+
+        f = open("./SumOfIncome.txt", "w")
+
+        f.write(str(self.sumOfIncome))
+
+        f.close()
+        
+
+        f = open("./SumOfOutcome.txt", "w")
+
+        f.write(str(self.sumOfOutcome))
+
+        f.close()
 
         return balance
     
